@@ -1,0 +1,4 @@
+sequence,structure,label
+a,h,S
+acgu,abcd,SNAX
+guacgu,abcdih,SNAXXX

@@ -1,0 +1,14 @@
+set description 001-baseline
+set email dk@msu.edu
+set freq_email Crash
+set priority 3
+set class_pref 99
+set walltime 48
+set mem_request 2
+set config_dir config
+set max_cpus 30
+
+# 1..30 ta0 /mnt/home/dk/bin/rna -c ealib.cfg --ea.rng.seed $seed
+
+# information-based FF
+1..30 tb0 /mnt/home/dk/bin/rna -c ealib.cfg --ea.rng.seed $seed
