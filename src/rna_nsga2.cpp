@@ -17,12 +17,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <mkv/markov_network_evolution.h>
 #include <ea/nsga2.h>
 #include <ea/datafiles/multiobjective_fitness.h>
 #include <ea/cmdline_interface.h>
 #include <ea/math/roc.h>
-#include <mkv/analysis.h>
+#include <ea/mkv/markov_network_evolution.h>
+#include <ea/mkv/analysis.h>
 using namespace ealib;
 
 #include "rna_nsga2.h"
@@ -48,13 +48,13 @@ struct rna_traits : nsga2_traits<T> {
 };
 
 // Evolutionary algorithm definition.
-typedef mkv::markov_network_evolution
+typedef markov_network_evolution
 < multi_rna_fitness
 , recombination::two_point_crossover
 , generational_models::nsga2
 , dont_stop
 , fill_population
-, mkv::markov_network_lifecycle
+, lifecycles::markov_network_lifecycle
 , rna_traits
 > ea_type;
 
@@ -62,7 +62,7 @@ template <typename EA>
 class cli : public cmdline_interface<EA> {
 public:
     virtual void gather_options() {
-        mkv::add_options(this);
+        add_mkv_options(this);
         
         add_option<POPULATION_SIZE>(this);
         add_option<RUN_UPDATES>(this);
@@ -82,7 +82,7 @@ public:
         add_tool<rna_train>(this);
         add_tool<rna_test>(this);
         add_tool<rna_multi_confusion>(this);
-        add_tool<mkv::multi_reduced_graph>(this);
+        add_tool<analysis::multi_reduced_graph>(this);
     }
     
     virtual void gather_events(EA& ea) {
@@ -92,8 +92,8 @@ public:
     //! Called before initialization (good place to calculate config options).
     virtual void before_initialization(EA& ea) {
         int nin=(get<CA_RADIUS>(ea)*2+1)*20;
-        put<mkv::MKV_INPUT_N>(nin, ea);
-        put<mkv::MKV_OUTPUT_N>(10, ea);
+        put<MKV_INPUT_N>(nin, ea);
+        put<MKV_OUTPUT_N>(10, ea);
     }
 };
 LIBEA_CMDLINE_INSTANCE(ea_type, cli);

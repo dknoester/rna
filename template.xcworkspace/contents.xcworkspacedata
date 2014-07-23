@@ -5,6 +5,6 @@
       location = "group:../ealib/ealib.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:template.xcodeproj">
+      location = "group:rna.xcodeproj">
    </FileRef>
 </Workspace>
