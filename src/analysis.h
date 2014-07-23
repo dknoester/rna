@@ -205,9 +205,6 @@ LIBEA_ANALYSIS_TOOL(rna_multi_confusion) {
         std::sort(ea.population().begin(), ea.population().end(), comparators::objective<EA>(k,ea));
         typename EA::reverse_iterator ind=ea.rbegin();
         
-        // take the "best" individual for this objective:
-        typename EA::phenotype_type& P=ealib::phenotype(*ind,ea);
-
         std::ostringstream fname;
         fname << "rna_confusion_ojb" << k << ".dat";
         datafile df(fname.str());
