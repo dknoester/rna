@@ -172,11 +172,23 @@ struct multi_rna_fitness : public fitness_function<multivalued_fitness<double>, 
             
             // fitness contribution:
             for(std::size_t j=0; j<r.output_size2(); ++j) { // columns
+                // check to see if we do better w/ restricted outputs or not:
+                int decision=0;
+                for(std::size_t k=0; k<3; ++k) {
+                    decision |= (*pt)(k,j) << k;
+                }
                 for(std::size_t k=0; k<r.output_size1(); ++k) { // rows
                     int c=r.N(k,j); // condition
-                    int t=(*pt)(k,j); // test outcome
+                    int t=(decision == k); // test outcome
                     (*A)[k](c, t);
                 }
+
+//                this is the multi-output setup:
+//                for(std::size_t k=0; k<r.output_size1(); ++k) { // rows
+//                    int c=r.N(k,j); // condition
+//                    int t=(*pt)(k,j); // test outcome
+//                    (*A)[k](c, t);
+//                }
             }
         }
         
