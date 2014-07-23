@@ -90,7 +90,7 @@ public:
     }
     
     //! Called before initialization (good place to calculate config options).
-    virtual void before_initialization(EA& ea) {
+    virtual void after_initialization(EA& ea) {
         int nin=(get<CA_RADIUS>(ea)*2+1)*20;
         put<MKV_INPUT_N>(nin, ea);
         put<MKV_OUTPUT_N>(10, ea);
