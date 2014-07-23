@@ -179,7 +179,7 @@ struct multi_rna_fitness : public fitness_function<multivalued_fitness<double>, 
                 }
                 for(std::size_t k=0; k<r.output_size1(); ++k) { // rows
                     int c=r.N(k,j); // condition
-                    int t=(decision == k); // test outcome
+                    int t=(decision == static_cast<int>(k)); // test outcome
                     (*A)[k](c, t);
                 }
 
